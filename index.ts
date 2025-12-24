@@ -6,24 +6,26 @@ import cors from "cors"
 import * as trpcExpress from "@trpc/server/adapters/express"
 import {appRouter} from "./trpcRouters/_app"
 import type {AppRouter} from "./trpcRouters/_app"
-import {trpcClient} from "./trpc/trpcClient"
 import mathRoute from "./routes/math.route.ts"
 import greetRoute from "./routes/greet.route.ts"
-
+import aiChatRoute from "./routes/aichat.route.ts"
 
 const app = express()
 app.use(express.json())
 
-app.use(cors({ origin: "http://localhost:3000" }))
+app.use(cors({ 
+    origin: "http://localhost:3000" ,
+    methods: ["POST"]}))
 
 
 app.use("/trpc", trpcExpress.createExpressMiddleware<AppRouter>({
 router: appRouter
 }))
 
-app.post("/greet", greetRoute)
+app.use("/greet", greetRoute)
 
-app.post("/math", mathRoute)
+app.use("/math", mathRoute)
+app.use("/aichat", aiChatRoute)
 
 
 

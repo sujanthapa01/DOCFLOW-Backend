@@ -1,3 +1,5 @@
+import dotenv from "dotenv";
+dotenv.config()
 import {AppRouter} from "../trpcRouters/_app"
 import {httpBatchLink, createTRPCProxyClient} from "@trpc/client"
 export const trpcClient = createTRPCProxyClient<AppRouter>({
