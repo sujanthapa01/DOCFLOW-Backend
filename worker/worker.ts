@@ -29,9 +29,11 @@ const worker = new Worker(
 
     // chunk
     const chunks = chunkText(cleaned_text);
+     console.log("CHUNKS: ",chunks)
 
     //Embeddings
     const embeddings = await embedText(chunks);
+    console.log("EMBEDDINGS: ",embeddings)
 
     //store embeddings in Qdrant
 
@@ -41,7 +43,7 @@ const worker = new Worker(
       payload: {
         text: chunk,
         filename: job.data.filename,
-        userid: job.data.userid
+        userid: job.data.userId
       }
     }));
 

@@ -1,7 +1,7 @@
 import OpenAI from "openai"
 
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: "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",
   baseURL:"https://openrouter.ai/api/v1",
   defaultHeaders:{
     "HTTP-Referer": "http://localhost:8080",

@@ -2,9 +2,9 @@ import type { Request, Response } from "express"
 import { pdfQueue } from "../queue/pdfQueue"
 
 export const pdfController = async (req: Request, res: Response) => {
-    const {file} = req.body
-    console.log(file)
-    console.log("pdf-controller")
+  const { file } = req.body
+  console.log(file)
+  console.log("pdf-controller")
   try {
     if (!req.file) {
       return res.status(400).json({
