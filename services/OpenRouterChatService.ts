@@ -4,6 +4,13 @@ import { openAi } from "../lib/aiChatModel"
 import { mapMessages } from '../mapper/openAimessage.mapper'
 
 
+/**
+ * 
+ * @param model 
+ * @param messages 
+ * @returns 
+ */
+
 
 // NON Stream Chat Function
 const nonStreamChat = async (
