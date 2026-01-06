@@ -1,0 +1,14 @@
+{
+  "name": "worker",
+  "version": "1.0.0",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@qdrant/js-client-rest": "^1.16.2",
+    "bullmq": "^5.66.4",
+    "ioredis": "^5.9.0",
+    "ts-node": "^10.9.2"
+  }
+}

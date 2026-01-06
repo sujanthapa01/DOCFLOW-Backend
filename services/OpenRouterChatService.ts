@@ -1,4 +1,4 @@
-import { IChatService } from "../interfaces/chatInterface"
+import { IChatService } from "../types/interfaces/chatInterface"
 import { ChatMeggage, ChatOptions } from "../types/chat"
 import { openAi } from "../lib/aiChatModel"
 import { mapMessages } from '../mapper/openAimessage.mapper'
@@ -17,12 +17,15 @@ const nonStreamChat = async (
     model: string,
     messages: ChatMeggage[]
 ): Promise<string> => {
-    const res = await openAi.chat.completions.create({
+    console.log("non stream",model,messages)
+
+    const result = await openAi.chat.completions.create({
         model,
         messages: mapMessages(messages),
     });
 
-    return res.choices[0].message.content ?? "";
+console.log("result:",result)
+    return result.choices[0].message.content ?? "";
 };
 
 // Stream Chat FUnction
@@ -49,6 +52,8 @@ export class OpenRouterChatService implements IChatService {
     async chat(messages: ChatMeggage[],
         options: ChatOptions = {}
     ): Promise<string | AsyncIterable<string>> {
+
+        console.log(options,messages)
 
         const model = options.model ?? "openai/gpt-4.1-mini"
         const stream = options.stream ?? false

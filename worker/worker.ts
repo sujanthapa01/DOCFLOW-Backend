@@ -9,10 +9,12 @@ import { v4 as uuidv4 } from "uuid"
 import { client as qdrant } from "./qdrant/client.ts"
 
 const redis = new IORedis({
-  host: "127.0.0.1",
+  host: "redis",
   port: 6379,
   maxRetriesPerRequest: null,
 });
+
+const redisHost = process.env.REDIS_HOST || "127.0.0.1"; 
 console.log("hii");
 
 const worker = new Worker(
@@ -58,7 +60,11 @@ const worker = new Worker(
 
   },
   {
-    connection: redis,
+    connection: {
+      host: redisHost,
+      port:6379,
+      maxRetriesPerRequest:null
+    },
   }
 );
 

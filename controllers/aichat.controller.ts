@@ -13,8 +13,10 @@ export const aiChatController = async (req: Request, res: Response) => {
         model?: string
     }
 
-    if (!message || Array.isArray(message)) {
-        res.json({ msg: "messssge is required" })
+    console.log(message,stream,model)
+
+    if (!message || !Array.isArray(message) || message.length === 0) {
+      return  res.json({ msg: "messssge is required" })
     }
 
 
@@ -29,7 +31,7 @@ export const aiChatController = async (req: Request, res: Response) => {
         })
 
         for await (const token of streamResponse as AsyncIterable<string>) {
-            res.write(`$data : ${token} \n\n`)
+            res.write(`data : ${token} \n\n`)
         }
 
         return res.end()
@@ -38,17 +40,18 @@ export const aiChatController = async (req: Request, res: Response) => {
 
     try {
 
-        const res = await chatService.chat(message, {
+        const response = await chatService.chat(message, {
             stream: stream,
             model: model
         })
 
+       return res.json(response)
 
 
 
     } catch (error) {
 
-        throw new Error("internal server error ''aiChat COntroller''")
+      return res.status(500).json({error: "Internal Server Error aiChat Controller"})
 
     }
 

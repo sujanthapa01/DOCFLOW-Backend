@@ -4,9 +4,6 @@ dotenv.config();
 import express from "express";
 import type { Request, Response } from "express";
 import cors from "cors";
-import * as trpcExpress from "@trpc/server/adapters/express";
-import { appRouter } from "./trpcRouters/_app";
-import type { AppRouter } from "./trpcRouters/_app";
 import Route from "./routes/routes";
 import {serverAdapter} from "./queue/queueDashboard"
 
@@ -22,16 +19,7 @@ app.use(
   })
 );
 
-// Health check
-app.get("/health", (_, res) => res.status(200).json({ status: "ok" }));
 
-// tRPC
-app.use(
-  "/trpc",
-  trpcExpress.createExpressMiddleware<AppRouter>({
-    router: appRouter,
-  })
-);
 
 // REST API
 app.use("/api", Route);
